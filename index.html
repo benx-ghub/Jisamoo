@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Jisamoo ❤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Permanent+Marker&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cardboard: #b8875a;
+    --cardboard-dark: #9c6f45;
+    --cardboard-deep: #7a5636;
+    --kraft-light: #d8b184;
+    --paper: #fdf8ee;
+    --paper-line: #d8cbb0;
+    --tape: #e8dcc0;
+    --twine: #8a6a45;
+    --ink: #3d2b1f;
+    --accent: #c1443c;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 4px),
+      linear-gradient(135deg, var(--cardboard) 0%, var(--cardboard-dark) 50%, var(--cardboard-deep) 100%);
+    font-family: 'Patrick Hand', cursive;
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* corrugated cardboard texture overlay */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 6px);
+    z-index: 0;
+  }
+
+  /* ===== BOX FLAP INTRO ===== */
+  .flap-wrap{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .flap{
+    position: absolute;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--kraft-light), var(--cardboard-dark));
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.25);
+    transition: transform 1.4s cubic-bezier(.7,0,.2,1);
+  }
+  .flap-left{ left:0; transform-origin: left center; }
+  .flap-right{ right:0; transform-origin: right center; }
+  .flap.opened.flap-left{ transform: rotateY(-100deg); }
+  .flap.opened.flap-right{ transform: rotateY(100deg); }
+  .flap-label{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-6deg);
+    font-family:'Permanent Marker', cursive;
+    font-size: clamp(20px, 4vw, 34px);
+    color: var(--ink);
+    opacity:0.75;
+    letter-spacing:1px;
+    text-align:center;
+    white-space: nowrap;
+  }
+  .flap-wrap.hidden{ display:none; }
+
+  /* ===== MAIN CONTENT ===== */
+  main{
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  .hero{
+    text-align:center;
+    margin-bottom: 70px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.5s;
+  }
+
+  .tag{
+    display:inline-block;
+    background: var(--paper);
+    padding: 26px 40px;
+    border-radius: 6px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.05);
+    transform: rotate(-2deg);
+    position: relative;
+  }
+  .tag::before{ /* string hole + twine */
+    content:"";
+    position:absolute;
+    top:-38px; left:50%;
+    width: 2px; height: 40px;
+    background: var(--twine);
+    transform: translateX(-50%) rotate(4deg);
+  }
+  .tag::after{
+    content:"";
+    position:absolute;
+    top:-14px; left:50%;
+    width:14px; height:14px;
+    border-radius:50%;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    transform: translateX(-50%);
+  }
+
+  .malayalam-greet{
+    font-family:'Kalam', cursive;
+    font-size: clamp(16px, 2.6vw, 20px);
+    color: var(--accent);
+    margin: 0 0 6px;
+  }
+  h1{
+    font-family:'Permanent Marker', cursive;
+    font-size: clamp(32px, 6vw, 58px);
+    margin: 0;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .subtitle{
+    font-family:'Kalam', cursive;
+    font-size: clamp(15px, 2.2vw, 19px);
+    margin-top: 10px;
+    color: #6b4a2f;
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-label{
+    font-family:'Permanent Marker', cursive;
+    color: var(--paper);
+    text-align:center;
+    font-size: clamp(20px, 3vw, 28px);
+    margin: 10px 0 36px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+    transform: rotate(-1deg);
+  }
+
+  /* ===== POLAROID CLOTHESLINE ===== */
+  .clothesline-area{
+    position: relative;
+    padding-top: 30px;
+    margin-bottom: 80px;
+  }
+  .twine-line{
+    position:absolute;
+    top: 28px; left: 2%; right: 2%;
+    height: 3px;
+    background: var(--twine);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .polaroid-row{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 22px;
+    position: relative;
+  }
+  .polaroid{
+    background: #fff;
+    padding: 14px 14px 40px;
+    width: 190px;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.28);
+    position: relative;
+    opacity: 0;
+    animation: dropIn 0.7s ease forwards;
+  }
+  .polaroid:nth-child(1){ transform: rotate(-6deg); animation-delay: 2s; }
+  .polaroid:nth-child(2){ transform: rotate(4deg); animation-delay: 2.25s; }
+  .polaroid:nth-child(3){ transform: rotate(-3deg); animation-delay: 2.5s; }
+  .polaroid:nth-child(4){ transform: rotate(5deg); animation-delay: 2.75s; }
+
+  .polaroid img{
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display:block;
+    background: #eee;
+  }
+  .polaroid .caption{
+    font-family:'Kalam', cursive;
+    text-align:center;
+    margin-top: 12px;
+    font-size: 15px;
+    color: #444;
+  }
+  .clip{
+    position:absolute;
+    top:-16px; left:50%;
+    transform: translateX(-50%);
+    width: 18px; height: 26px;
+    background: var(--accent);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .clip::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width: 10px; height:10px;
+    background: var(--twine);
+    border-radius:50%;
+    transform: translate(-50%,-50%);
+  }
+
+  /* ===== LETTER ===== */
+  .letter-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 80px;
+  }
+  .letter{
+    background: var(--paper);
+    background-image: repeating-linear-gradient(var(--paper) 0px, var(--paper) 27px, var(--paper-line) 28px);
+    padding: 34px 36px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+    transform: rotate(1.3deg);
+    position:relative;
+  }
+  .letter::before{
+    content:"";
+    position:absolute;
+    top:-10px; left:20px;
+    width: 70px; height: 26px;
+    background: rgba(232,220,192,0.85);
+    border: 1px solid rgba(0,0,0,0.05);
+    transform: rotate(-6deg);
+  }
+  .letter::after{
+    content:"";
+    position:absolute;
+    top:-10px; right:20px;
+    width: 70px; height: 26px;
+    background: rgba(232,220,192,0.85);
+    border: 1px solid rgba(0,0,0,0.05);
+    transform: rotate(5deg);
+  }
+  .letter p{
+    font-family:'Kalam', cursive;
+    font-size: 18px;
+    line-height: 28px;
+    margin: 0 0 4px;
+    color: #33261a;
+  }
+  .letter .sign-off{
+    text-align:right;
+    margin-top: 18px;
+    font-family:'Permanent Marker', cursive;
+    font-size: 20px;
+    color: var(--accent);
+  }
+
+  /* ===== YOUTUBE STAMP BUTTON ===== */
+  .video-area{
+    text-align:center;
+    margin-bottom: 40px;
+  }
+  .stamp-btn{
+    display:inline-flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 6px;
+    text-decoration:none;
+    background: var(--accent);
+    color: #fff8ee;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px dashed rgba(255,255,255,0.75);
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+    font-family:'Permanent Marker', cursive;
+    transform: rotate(-8deg);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+  }
+  .stamp-btn:hover{
+    transform: rotate(-8deg) scale(1.06);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+  }
+  .stamp-btn:focus-visible{
+    outline-color: #fff;
+  }
+  .stamp-btn .play{
+    font-size: 34px;
+    line-height:1;
+  }
+  .stamp-btn .stamp-text{
+    font-size: 14px;
+    letter-spacing: 1px;
+    max-width: 110px;
+    text-align:center;
+    line-height: 1.2;
+  }
+  .video-caption{
+    font-family:'Kalam', cursive;
+    color: var(--paper);
+    margin-top: 16px;
+    font-size: 16px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+  }
+
+  footer{
+    text-align:center;
+    font-family:'Kalam', cursive;
+    color: rgba(255,248,238,0.85);
+    font-size: 14px;
+    padding-bottom: 30px;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(20px);}
+    to{ opacity:1; transform: translateY(0);}
+  }
+  @keyframes dropIn{
+    from{ opacity:0; transform: translateY(-40px) rotate(0deg);}
+    to{ opacity:1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .flap, .hero, .polaroid{ animation: none !important; transition: none !important; }
+    .flap-wrap{ display:none; }
+    .hero{ opacity:1; }
+    .polaroid{ opacity:1; }
+  }
+
+  @media (max-width: 480px){
+    .polaroid{ width: 42vw; }
+    .polaroid img{ height: 42vw; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Box flap intro overlay -->
+  <div class="flap-wrap" id="flapWrap">
+    <div class="flap flap-left" id="flapLeft">
+      <div class="flap-label">Happy </div>
+    </div>
+    <div class="flap flap-right" id="flapRight">
+      <div class="flap-label">Birthday</div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="tag">
+        <h1>Happy Birthday,<br>Jisa😘❤️🎂</h1>
+      </div>
+    </section>
+
+    <section class="clothesline-area">
+      <h2 class="section-label">a few of my favourites 📷</h2>
+      <div class="twine-line"></div>
+      <div class="polaroid-row">
+        <div class="polaroid">
+          <div class="clip"></div>
+          <img src="img/image1.jpg" alt="Us">
+          <div class="caption">My fav place (anywhere nxt 2 u)</div>
+        </div>
+        <div class="polaroid">
+          <div class="clip"></div>
+          <img src="img/image2.jpg" alt="Silly">
+          <div class="caption">us, being silly</div>
+        </div>
+        <div class="polaroid">
+          <div class="clip"></div>
+          <img src="img/image3.jpg" alt="fav">
+          <div class="caption">my favourite smile</div>
+        </div>
+        <div class="polaroid">
+          <div class="clip"></div>
+          <img src="img/image4.jpg" alt="forever">
+          <div class="caption">forever and always together</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="letter-wrap">
+      <div class="letter">
+        <p>Happy Birthday Bae,</p>
+        <p>Thank you for being the best part of my everyday — I just wanted to build something small
+        by my own to say how much you mean to me.</p>
+        <p>Every photo up there is a memory I'll keep forever. And there's one more thing I made for you below,
+        so scroll down and press play. 🎬</p>
+        <p>Happy birthday, da. I love you more than words can say.</p>
+        <div class="sign-off">— Booski🦧🤍</div>
+      </div>
+    </section>
+
+    <section class="video-area">
+      <h2 class="section-label">one more surprise 🎥</h2>
+      <a class="stamp-btn" href="https://youtu.be/REPLACE_WITH_YOUR_VIDEO_ID" target="_blank" rel="noopener">
+        <span class="play">▶</span>
+        <span class="stamp-text">watch this</span>
+      </a>
+      <div class="video-caption">(tap to open — best with sound on)</div>
+    </section>
+  </main>
+
+  <footer>made with ❤ , just for you</footer>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('flapLeft').classList.add('opened');
+      document.getElementById('flapRight').classList.add('opened');
+      setTimeout(() => {
+        document.getElementById('flapWrap').classList.add('hidden');
+      }, 1500);
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
